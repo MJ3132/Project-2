@@ -3,3 +3,5 @@ node_modules
 npm-debug.log
 .env
 /nbproject/private/
+
+config/config.json
