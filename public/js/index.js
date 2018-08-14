@@ -10,8 +10,13 @@ var ReSignUpPassword = $("#ReSignUpPassword");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
+    checkUserExists: function (username) {
+        return $.ajax({
+            url: "api/users/" + username,
+            type: "GET"
+        });
+    },
     getUsers: function () {
-        console.log('getUsers front end');
         return $.ajax({
             url: "api/users",
             type: "GET"
@@ -84,23 +89,32 @@ var refreshExamples = function () {
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function (event) {
-    event.preventDefault();
-    console.log("submit form");
-    console.log($("#SignUpUsername").val());
 
-    if (SignUpPassword.val() === ReSignUpPassword.val() && SignUpPassword.val() !== null && SignUpUsername.val() !== null) {
-        API.getUsers().then(function (data) {
-            console.log("get return data: " + data);
-        });
-        var user = {
-            username: SignUpUsername.val(),
-            password: SignUpPassword.val()
-        };
-        API.saveUser(user).then(function (data) {
-            console.log("save return data: " + data);
-        });
+    event.preventDefault();
+
+    clearErrorMessages();
+
+    if (SignUpPassword.val() === ReSignUpPassword.val()) {
+        if (SignUpPassword.val().length !== 0) {
+            if (SignUpUsername.val().length !== 0) {
+                clearErrorMessages();
+                contactBackEnd();
+                clearInputFields();
+                
+            } else {
+                clearErrorMessages();
+                document.getElementById("UsernameNull").style.display = "block";
+                clearInputFields();
+            }
+        } else {
+            clearErrorMessages();
+            document.getElementById("PasswordNull").style.display = "block";
+            clearInputFields();
+        }
     } else {
+        clearErrorMessages();
         document.getElementById("PasswordsNotMatch").style.display = "block";
+        clearInputFields();
     }
 
 //    var example = {
@@ -121,6 +135,40 @@ var handleFormSubmit = function (event) {
 //    $exampleDescription.val("");
 };
 
+function contactBackEnd() {
+//    API.getUsers().then(function (data) {
+//        console.log("get return data: " + data);
+//    });
+    var user = {
+        username: SignUpUsername.val(),
+        password: SignUpPassword.val()
+    };
+    API.checkUserExists(user.username).then(function (data) {
+        if (data) {
+            document.getElementById("UsernameAlreadyExists").style.display = "block";
+        } else {
+            clearErrorMessages();
+            document.getElementById("SignUpSuccess").style.display = "block";
+            
+            API.saveUser(user).then(function (data) {
+                console.log("save return data: " + data);
+            });
+        }
+    });
+}
+
+function clearErrorMessages() {
+    document.getElementById("PasswordsNotMatch").style.display = "none";
+    document.getElementById("PasswordNull").style.display = "none";
+    document.getElementById("UsernameNull").style.display = "none";
+    document.getElementById("SignUpSuccess").style.display = "none";
+}
+
+function clearInputFields() {
+    SignUpPassword.val("");
+    ReSignUpPassword.val("");
+    SignUpUsername.val("");
+}
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
 var handleDeleteBtnClick = function () {

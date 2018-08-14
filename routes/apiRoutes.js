@@ -1,7 +1,18 @@
 var db = require("../models");
+var bcrypt = require("bcrypt");
 
 module.exports = function (app) {
-    
+
+    app.get("/api/users/:username", function (req, res) {
+        db.User.findOne({
+            where: {
+                username: req.params.username
+            }
+        }).then(function (dbUsers) {
+            res.json(dbUsers);
+        });
+    });
+
     app.get("/api/users", function (req, res) {
         db.User.findAll({}).then(function (dbUsers) {
             res.json(dbUsers);
@@ -9,8 +20,19 @@ module.exports = function (app) {
     });
 
     app.post("/api/users", function (req, res) {
-        db.User.create(req.body).then(function (dbUser) {
-            res.json(dbUser);
+        console.log(req.body);
+
+        bcrypt.hash(req.body.password, 10, function (err, hash) {
+            if (err) {
+                res.json("bcrypt failed");
+            } else {
+                db.User.create({
+                    username: req.body.username,
+                    password: hash
+                }).then(function (dbUser) {
+                    res.json(dbUser);
+                });
+            }
         });
     });
 
