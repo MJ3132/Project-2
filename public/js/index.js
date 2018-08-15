@@ -41,7 +41,7 @@ var API = {
     });
   },
   getExamples: function () {
-    console.log("getExamples front end")
+    console.log("getExamples front end");
     return $.ajax({
       url: "api/examples",
       type: "GET"
