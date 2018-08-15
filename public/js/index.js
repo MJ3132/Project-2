@@ -145,7 +145,7 @@ function contactBackEnd() {
       document.getElementById("SignUpSuccess").style.display = "block";
 
       API.saveUser(user).then(function (data) {
-
+        console.log(data);
       });
     }
   });
