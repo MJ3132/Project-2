@@ -133,9 +133,6 @@ var handleFormSubmit = function (event) {
 };
 
 function contactBackEnd() {
-  //    API.getUsers().then(function (data) {
-  //        console.log("get return data: " + data);
-  //    });
   var user = {
     username: SignUpUsername.val(),
     password: SignUpPassword.val()
@@ -148,7 +145,7 @@ function contactBackEnd() {
       document.getElementById("SignUpSuccess").style.display = "block";
 
       API.saveUser(user).then(function (data) {
-        console.log("save return data: " + data);
+
       });
     }
   });
