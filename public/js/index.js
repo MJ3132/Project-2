@@ -1,25 +1,38 @@
 // Get references to page elements
-var $submitBtn = $("#submit");
+var $submitSignUpBtn = $("#submit-signup");
+var $submitLoginBtn = $("#submit-login");
 var $exampleList = $("#example-list");
 
 var SignUpUsername = $("#SignUpUsername");
 var SignUpPassword = $("#SignUpPassword");
 var ReSignUpPassword = $("#ReSignUpPassword");
+var LoginUsername = $("#InputUsername");
+var LoginPassword = $("#InputPassword");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
+  checkUserCredentials: function (user) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "api/login",
+      type: "POST",
+      data: JSON.stringify(user)
+    });
+  },
   checkUserExists: function (username) {
     return $.ajax({
       url: "api/users/" + username,
       type: "GET"
     });
   },
-  getUsers: function () {
-    return $.ajax({
-      url: "api/users",
-      type: "GET"
-    });
-  },
+  // getUsers: function () {
+  //   return $.ajax({
+  //     url: "api/users",
+  //     type: "GET"
+  //   });
+  // },
   saveUser: function (user) {
     return $.ajax({
       headers: {
@@ -54,6 +67,10 @@ var API = {
   }
 };
 
+function showErrorUsernameDoesNotExist() {
+  document.getElementById("UsernameDoesNotExist").style.display = "block";
+}
+
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function () {
   API.getExamples().then(function (data) {
@@ -85,7 +102,8 @@ var refreshExamples = function () {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function (event) {
+var handleSignUpFormSubmit = function (event) {
+  clearErrorMessages(); 
 
   event.preventDefault();
 
@@ -95,7 +113,7 @@ var handleFormSubmit = function (event) {
     if (SignUpPassword.val().length !== 0) {
       if (SignUpUsername.val().length !== 0) {
         clearErrorMessages();
-        contactBackEnd();
+        contactBackEndSignUp();
         clearInputFields();
 
       } else {
@@ -113,27 +131,27 @@ var handleFormSubmit = function (event) {
     document.getElementById("PasswordsNotMatch").style.display = "block";
     clearInputFields();
   }
-
-  //    var example = {
-  //        text: $exampleText.val().trim(),
-  //        description: $exampleDescription.val().trim()
-  //    };
-  //
-  //    if (!(example.text && example.description)) {
-  //        alert("You must enter an example text and description!");
-  //        return;
-  //    }
-  //
-  //    API.saveExample(example).then(function () {
-  //        refreshExamples();
-  //    });
-  //
-  //    $exampleText.val("");
-  //    $exampleDescription.val("");
 };
 
-function contactBackEnd() {
-  var user = {
+var handleLoginFormSubmit = function (event) {
+
+  event.preventDefault();
+
+  if(LoginPassword.val().length !== 0) {
+    if(LoginUsername.val().length !== 0) {
+      contactBackEndLogin();
+    }
+    else {
+
+    }
+  }
+  else {
+
+  }
+};
+
+function contactBackEndSignUp() {
+  let user = {
     username: SignUpUsername.val(),
     password: SignUpPassword.val()
   };
@@ -147,6 +165,19 @@ function contactBackEnd() {
       API.saveUser(user).then(function (data) {
         console.log(data);
       });
+    }
+  });
+}
+
+function contactBackEndLogin() {
+  let user = {
+    username: LoginUsername.val(),
+    password: LoginPassword.val()
+  };
+  API.checkUserCredentials(user).then(function (data) {
+    if(data) {
+      //LOGIN ---------------------------------------------------------------------------------------------------
+
     }
   });
 }
@@ -176,5 +207,6 @@ var handleDeleteBtnClick = function () {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+$submitSignUpBtn.on("click", handleSignUpFormSubmit);
+$submitLoginBtn.on("click", handleLoginFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);

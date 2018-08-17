@@ -1,7 +1,36 @@
 var db = require("../models");
 var bcrypt = require("bcrypt");
 
+function showErrorUsernameDoesNotExist2() {
+  showErrorUsernameDoesNotExist();
+}
+
 module.exports = function (app) {
+  app.post("/api/login", function (req, res) {
+    console.log(req.body);
+    db.User.findOne({
+      where: {
+        username: req.body.username
+      }
+    }).then(function (dbUser) {
+      if(dbUser) {
+        bcrypt.compare(req.body.password, dbUser.password, function(err, res) {
+          if(res) {
+            console.log("passwords match!");
+          }
+          else {
+            document.getElementById("LoginError").style.display = "block";
+          }
+        });
+      } 
+      else {
+        //username does not exist
+        console.log("username does not exist");
+        showErrorUsernameDoesNotExist2();
+      }
+      res.json(dbUser);
+    });
+  });
 
   app.get("/api/users/:username", function (req, res) {
     db.User.findOne({
@@ -13,11 +42,11 @@ module.exports = function (app) {
     });
   });
 
-  app.get("/api/users", function (req, res) {
-    db.User.findAll({}).then(function (dbUsers) {
-      res.json(dbUsers);
-    });
-  });
+  //   app.get("/api/users", function (req, res) {
+  //     db.User.findAll({}).then(function (dbUsers) {
+  //       res.json(dbUsers);
+  //     });
+  //   });
 
   app.post("/api/users", function (req, res) {
     bcrypt.hash(req.body.password, 10, function (err, hash) {
