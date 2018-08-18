@@ -271,3 +271,64 @@
 	display: inline-block;
 	margin: 0 20px;
 }
+
+body {
+  background-color:#70c1b3;
+  margin: 0;
+  padding: 0;
+}
+
+/* 
+footer {
+  color: white;
+  text-align: center;
+} */
+#question-choice{
+  transition-duration: 5s ease-in-out left;
+  transition-property: opacity;
+}
+
+#summary {
+  color: #70c1b3;
+  background-color: transparent;
+  text-align: center;
+}
+
+#main-content{
+  height: 25%;
+  width: 100%;
+  background-color: transparent;
+  color: #50514F;
+}
+
+#question-choice {
+  color: #70c1b3;
+  margin-top : 3%;
+  background: transparent;
+  font-family: sans-serif;
+  text-align: center;
+  align-content: center;
+  border-radius: 10px;
+  width: 85%;
+  max-width: 600px;
+  background: #f1f1f1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 30px 40px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 20px #000000b3;
+  font-family: "Montserrat",sans-serif;
+
+}
+
+
+#answer {
+  background: white;
+  border: black;
+  outline-color:#70c1b3;
+  padding: 20px;
+}
