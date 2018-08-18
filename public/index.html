@@ -1,0 +1,133 @@
+<html>
+
+<head>
+    <title>Computer Science Trivia Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<!--style="background-color: #50514F;-->
+<body background="/images/index-background.jpg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a style="color: #50514F;" class="navbar-brand" href="#">Computer Science Trivia Game</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a style="color: #50514F;" class="nav-link" href="index.html">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About Us</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="header">
+                <div class="animation-target">
+                    <h2 class="headerText">Computer Science Trivia Game</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; margin-top: 20px; display: none;" id="UsernameDoesNotExist" role="alert">
+        Username does not exist!
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; margin-top: 20px; display: none;" id="UsernameEmpty" role="alert">
+        Username Empty!
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; margin-top: 20px; display: none;" id="PasswordEmpty" role="alert">
+        Password Empty!
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; margin-top: 20px; display: none;" id="WrongPassword" role="alert">
+        Wrong Password!
+    </div>
+
+    <div class="alert alert-success" style="text-align: center; margin-top: 20px; display: none;" id="LoginSuccessful" role="alert">
+        Login Successful!
+    </div>
+
+    <div class="container-fluid">
+        <div>
+
+            <form>
+                <h3 style="margin: 0 auto; margin-top: 20px; text-align: center; color: white;">Sign In</h3>
+                <div class="form-group" style="margin-top: 20px;">
+                    <input style="width: 280px; margin: 0 auto; text-align: center;" type="username" class="form-control" id="InputUsername"
+                        placeholder="Enter username">
+                </div>
+                <div class="form-group">
+                    <input style="width: 280px; margin: 0 auto; text-align: center;" type="password" class="form-control" id="InputPassword"
+                        placeholder="Enter Password">
+                </div>
+                <div style="margin: 0 auto; text-align: center;">
+                    <button id="submit-login" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="alert alert-danger" style="text-align: center; display: none;" id="PasswordsNotMatch" role="alert">
+        Passwords do not match!
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; display: none;" id="PasswordNull" role="alert">
+        Password is empty!
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; display: none;" id="UsernameNull" role="alert">
+        Username is empty!
+    </div>
+
+    <div class="alert alert-danger" style="text-align: center; display: none;" id="UsernameAlreadyExists" role="alert">
+        Username already exists!
+    </div>
+
+    <div class="alert alert-success" style="text-align: center; display: none;" id="SignUpSuccess" role="alert">
+        Sign up success!
+    </div>
+
+    <div class="container">
+        <div>
+            <form>
+                <h3 style="margin: 0 auto; margin-top: 20px; text-align: center; color: white;">Sign Up</h3>
+                <div class="form-group" style="margin-top: 20px;">
+                    <input style="width: 280px; margin: 0 auto; text-align: center;" type="username" class="form-control" id="SignUpUsername"
+                        placeholder="Enter Username">
+                </div>
+                <div class="form-group">
+                    <input style="width: 280px; margin: 0 auto; text-align: center;" type="password" class="form-control" id="SignUpPassword"
+                        placeholder="Enter Password">
+                </div>
+                <div class="form-group">
+                    <input style="width: 280px; margin: 0 auto; text-align: center;" type="password" class="form-control" id="ReSignUpPassword"
+                        placeholder="Re-enter Password">
+                </div>
+                <div style="margin: 0 auto; text-align: center;">
+                    <button id="submit-signup" type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
