@@ -1,4 +1,5 @@
 var db = require("../models");
+
 var bcrypt = require("bcrypt");
 
 module.exports = function (app) {
@@ -34,9 +35,23 @@ module.exports = function (app) {
     });
   });
 
-  // Get all examples
-  app.get("/api/examples", function (req, res) {
+ 
+  app.post("/api/scores", function (req, res) {
+
+    var {scores} = req.body;
+
+    db.scores.create({
+      scores: scores
+    }).then(function (scores){
+    
+    })
+
+  
+
+
+
     db.Example.findAll({}).then(function (dbExamples) {
+
       res.json(dbExamples);
     });
   });

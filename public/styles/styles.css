@@ -332,3 +332,11 @@ footer {
   outline-color:#70c1b3;
   padding: 20px;
 }
+
+@media only screen and (max-width: 690px)
+{
+  #question-choice
+  {
+    margin-top: 10%;
+  }
+}

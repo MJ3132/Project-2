@@ -22,7 +22,7 @@ Array.prototype.shuffle = function () {
 }
 
 
-rp("https://opentdb.com/api.php?amount=20&category=18")
+rp("https://opentdb.com/api.php?amount=100&category=18")
   .then(function (body) {
 
 
@@ -55,13 +55,10 @@ rp("https://opentdb.com/api.php?amount=20&category=18")
 
 
 
-
-
 //**************************************************** MARTIN CODE *********************************************************
 
 module.exports = function (app) {
   // Load index page
-
 
   app.get("/trivia", function (req, res) {
 
@@ -71,24 +68,21 @@ module.exports = function (app) {
     });
   });
 
-  app.post("/", function (req, res) {
+  app.get("/", function (req, res) {
+
+    res.render(path.join(__dirname, "../views/index.handlebars"));
 
 
   })
 
-
-
   // Load example page and pass in an example by id
-  app.get("/trivia/:id?", function (req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function (dbExample) {
-      res.render("example", {
-        example: dbExample
-      });
-    });
+  app.get("/scores", function (req, res) {
+
+    res.render(path.join(__dirname, "../views/scores.handlebars"));
   });
 
   app.get("/about",function(req, res) {
-    res.render("about", {});
+    res.render(path.join(__dirname, "../views/about.handlebars"));
   });
 
   // Render 404 page for any unmatched routes
