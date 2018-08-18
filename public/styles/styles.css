@@ -1,3 +1,11 @@
+
+body {
+  background-color:#70c1b3;
+  margin: 0;
+  padding: 0;
+}
+
+
 .header {
     height: 100px;
     line-height: 100px;
@@ -204,7 +212,7 @@
   -moz-border-radius: 50%;
 }
 .ch-img-4{ 
-    background-image: url(../images/jass4.jpg);
+    background-image: url(../images/jass4.JPG);
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -o-border-radius: 50%;
@@ -272,11 +280,7 @@
 	margin: 0 20px;
 }
 
-body {
-  background-color:#70c1b3;
-  margin: 0;
-  padding: 0;
-}
+
 
 /* 
 footer {
